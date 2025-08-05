@@ -1,0 +1,35 @@
+server:
+  port: 9010
+  servlet:
+    context-path: /inventory
+
+spring:
+  application:
+    name: inventory-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/inventoryDB
+    username: postgres
+    password: POSTGRESPASSWORD
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:data.sql
+
+#eureka service
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+#  instance:
+#    prefer-ip-address: true

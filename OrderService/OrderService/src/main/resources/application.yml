@@ -1,0 +1,68 @@
+management:
+  health:
+    circuitbreaker:
+      enabled : true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+#Setting up server port and path of this api calls
+server:
+  port: 9020
+  servlet:
+    context-path: /orders
+
+#Setting up database , application-name as seen by other services and database and sql specific features
+spring:
+  application:
+    name: order-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ordersDB
+    username: postgres
+    password: POSTGRESPASSWORD
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+#eureka service
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+#rsilience4j -> rate limiter,retry mechanisms ,circuitBreaker
+resilience4j:
+  retry:
+    instances:
+      inventoryRetry:
+#        baseConfig: default   //can use both default and custom at the same time for all
+        maxRetryAttempts: 4  # Number of retry attempts before fallback method triggered
+        waitDuration: 30s    # Duration after which retry is attempted
+  ratelimiter:
+    instances:
+      inventoryRateLimiter:
+        limitForPeriod: 1  # no of calls in refreshPeriod
+        limitRefreshPeriod: 5s # refreshes the limit every set time
+        timeOutDuration: 1s # time to wait for permission before a request fails
+  circuitbreaker:
+    instances:
+      inventoryCircuitBreaker:
+        register-health-indicator: true  # Expose CircuitBreaker health via the actuator
+        slidingWindowSize: 10            # Size ofSliding Window for Call Recording
+        slidingWindowType: COUNT_BASED   # Use Count base Sliding Window
+        minimumNumberOfCalls: 10         # Minimum number of calls before calculating failure rate
+        failureRateThreshold: 50         # If 50%(5 out of 10) calls fail CircuitBreaker goes in Open State
+        waitDurationInOpenState: 20s     # Time for which circuit breaker stays in open state before going in half-open state
+        permittedNumberOfCallInHalfOpenState: 3   # Number of test calls in Half Open State
+        eventConsumerBufferSize: 10      #Buffer Size for event logs
