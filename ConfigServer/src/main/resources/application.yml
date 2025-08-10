@@ -7,7 +7,6 @@ spring:
         git:
           uri: https://github.com/Ketan-ship-it/Config-Server
           username: Ketan-ship-it
-          password: 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
           default-label: main
 
 server:
