@@ -1,6 +1,5 @@
+spring.application.name: config-server
 spring:
-  application:
-    name: configserver
   cloud:
     config:
       server:
@@ -8,11 +7,13 @@ spring:
           uri: https://github.com/Ketan-ship-it/Config-Server
           username: Ketan-ship-it
           default-label: main
-
 server:
   port: 8888
-
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
+
+
+
+
