@@ -7,18 +7,20 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="ShippingService" />
-        <module name="OrderService" />
-        <module name="DiscoveryService" />
-        <module name="Api-Gateway" />
         <module name="UserService" />
         <module name="InventoryService" />
+        <module name="ShippingService" />
+        <module name="ConfigServer" />
+        <module name="DiscoveryService" />
+        <module name="OrderService" />
+        <module name="Api-Gateway" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Api-Gateway" options="-parameters" />
+      <module name="ConfigServer" options="-parameters" />
       <module name="DiscoveryService" options="-parameters" />
       <module name="InventoryService" options="-parameters" />
       <module name="OrderService" options="-parameters" />

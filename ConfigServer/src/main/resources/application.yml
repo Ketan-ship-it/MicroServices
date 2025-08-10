@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: configserver
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/Ketan-ship-it/Config-Server
+          username: Ketan-ship-it
+          password: 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
+          default-label: main
+
+server:
+  port: 8888
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka

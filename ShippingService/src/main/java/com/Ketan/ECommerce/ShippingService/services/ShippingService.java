@@ -1,6 +1,6 @@
 package com.Ketan.ECommerce.ShippingService.services;
 
-import com.Ketan.ECommerce.ShippingService.client.client.OrderFeignClient;
+import com.Ketan.ECommerce.ShippingService.clients.OrderFeignClient;
 import com.Ketan.ECommerce.ShippingService.dto.BillDto;
 import com.Ketan.ECommerce.ShippingService.dto.OrderDto;
 import com.Ketan.ECommerce.ShippingService.dto.ShippingDto;
